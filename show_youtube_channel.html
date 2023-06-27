@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Show YouTube Channel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>{{ channel.name }}</h1>
+            <div class="channel-info">
+                <img :src="channel.profile_picture" :alt="channel.name">
+                <div class="channel-description">
+                    <p>{{ channel.description }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" v-model="searchQuery" class="form-control" placeholder="Search videos">
+            </div>
+
+            <ul class="video-list">
+                <li v-for="video in filteredVideos" class="video-item">
+                    <a :href="video.video_link" target="_blank">
+                        <img :src="video.thumbnail" :alt="video.title" class="video-thumbnail">
+                    </a>
+                    <div class="video-details">
+                        <h3 class="video-title">{{ video.title }}</h3>
+                        <p class="video-description">{{ video.description }}</p>
+                    </div>
+                </li>
+                <li v-if="filteredVideos.length === 0">No videos found.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
